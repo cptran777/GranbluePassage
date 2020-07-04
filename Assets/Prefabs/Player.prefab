@@ -99,3 +99,4 @@ MonoBehaviour:
     type: 3}
   relativeLaserYSpawnOffset: 4.25
   relativeLaserXSpawnOffset: 3
+  laserFireRate: 0.1

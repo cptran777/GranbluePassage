@@ -20,7 +20,7 @@ public class PlayerHandler : MonoBehaviour {
     [Tooltip("Relative position of the laser spawn based on the width of the player")]
     [SerializeField] float relativeLaserXSpawnOffset = 3f;
 
-    [Tooltip("Rate at which the laser fires when the player holds down the fire button")]
+    [Tooltip("Rate at which the laser fires when the player holds down the fire button, defined as time between shots in seconds")]
     [SerializeField] float laserFireRate = 0.5f;
 
     /**
