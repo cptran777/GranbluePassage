@@ -20,6 +20,9 @@ public class PlayerHandler : MonoBehaviour {
     [Tooltip("Relative position of the laser spawn based on the width of the player")]
     [SerializeField] float relativeLaserXSpawnOffset = 3f;
 
+    [Tooltip("Rate at which the laser fires when the player holds down the fire button")]
+    [SerializeField] float laserFireRate = 0.5f;
+
     /**
      * Reference to the main camera so that we can handle restrictions on player controls based on
      * the view port
@@ -40,6 +43,12 @@ public class PlayerHandler : MonoBehaviour {
      */
     SpriteRenderer spriteRenderer;
 
+    /**
+     * If the player has fired their laser, this variable will keep the coroutine associated with that
+     * so that we can also stop it on command
+     */
+    Coroutine laserFiringCoroutine;
+
     void Start() {
         mainCamera = Camera.main;
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -48,7 +57,7 @@ public class PlayerHandler : MonoBehaviour {
 
     void Update() {
         Move();
-        FireLaser();
+        HandleUserFireInput();
     }
 
     /**
@@ -75,17 +84,13 @@ public class PlayerHandler : MonoBehaviour {
     /**
      * Upon player fire control, shoots a basic laser ammo from the cross bow
      */
-    private void FireLaser() {
+    private void HandleUserFireInput() {
         if (CrossPlatformInputManager.GetButtonDown("Fire1")) {
-            Vector3 spriteSize = spriteRenderer.bounds.size;
+            laserFiringCoroutine = StartCoroutine(ContinuousLaserFire());
+        }
 
-            Vector3 position = new Vector3(
-                transform.position.x + spriteSize.x / relativeLaserXSpawnOffset,
-                transform.position.y + spriteSize.y / relativeLaserYSpawnOffset,
-                transform.position.z
-            );
-            // Quaternion.identity => keep the default rotation
-            GameObject laser = Instantiate(laserObject, position, Quaternion.identity);
+        if (CrossPlatformInputManager.GetButtonUp("Fire1")) {
+            StopCoroutine(laserFiringCoroutine);
         }
     }
 
@@ -99,5 +104,24 @@ public class PlayerHandler : MonoBehaviour {
         float nextXPostion = Mathf.Clamp(transform.position.x + deltaX, minimumXBoundary, maximumXBoundary);
         float nextYPosition = Mathf.Clamp(transform.position.y + deltaY, minimumYBoundary, maximumYBoundary);
         transform.position = new Vector2(nextXPostion, nextYPosition);
+    }
+
+    /**
+     * Creates lasers at the player position continuously at the desired fire rate. Set as IEnumerator for
+     * coroutines so that we can control the rate of fire. We now have a poor man's debounce
+     */
+    IEnumerator ContinuousLaserFire() {
+        while (true) {
+            Vector3 spriteSize = spriteRenderer.bounds.size;
+
+            Vector3 position = new Vector3(
+                transform.position.x + spriteSize.x / relativeLaserXSpawnOffset,
+                transform.position.y + spriteSize.y / relativeLaserYSpawnOffset,
+                transform.position.z
+            );
+            // Quaternion.identity => keep the default rotation
+            GameObject laser = Instantiate(laserObject, position, Quaternion.identity);
+            yield return new WaitForSeconds(laserFireRate);
+        }
     }
 }
