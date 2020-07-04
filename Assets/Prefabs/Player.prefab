@@ -97,3 +97,5 @@ MonoBehaviour:
   playerSpeedModifier: 5
   laserObject: {fileID: 3116984640777630822, guid: 5555b9c80721b421aaf4cb37a01a2067,
     type: 3}
+  relativeLaserYSpawnOffset: 4.25
+  relativeLaserXSpawnOffset: 3

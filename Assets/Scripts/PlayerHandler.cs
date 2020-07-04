@@ -14,6 +14,12 @@ public class PlayerHandler : MonoBehaviour {
     [Tooltip("Reference to the game object used as the laser for the player")]
     [SerializeField] GameObject laserObject;
 
+    [Tooltip("Relative position of the laser based on the height of the player")]
+    [SerializeField] float relativeLaserYSpawnOffset = 4f;
+
+    [Tooltip("Relative position of the laser spawn based on the width of the player")]
+    [SerializeField] float relativeLaserXSpawnOffset = 3f;
+
     /**
      * Reference to the main camera so that we can handle restrictions on player controls based on
      * the view port
@@ -66,10 +72,20 @@ public class PlayerHandler : MonoBehaviour {
         maximumYBoundary = topRightCorner.y - offsetY;
     }
 
+    /**
+     * Upon player fire control, shoots a basic laser ammo from the cross bow
+     */
     private void FireLaser() {
         if (CrossPlatformInputManager.GetButtonDown("Fire1")) {
+            Vector3 spriteSize = spriteRenderer.bounds.size;
+
+            Vector3 position = new Vector3(
+                transform.position.x + spriteSize.x / relativeLaserXSpawnOffset,
+                transform.position.y + spriteSize.y / relativeLaserYSpawnOffset,
+                transform.position.z
+            );
             // Quaternion.identity => keep the default rotation
-            Instantiate(laserObject, transform.position, Quaternion.identity);
+            GameObject laser = Instantiate(laserObject, position, Quaternion.identity);
         }
     }
 
