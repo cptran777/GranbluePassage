@@ -85,12 +85,19 @@ public class PlayerHandler : MonoBehaviour {
      * Upon player fire control, shoots a basic laser ammo from the cross bow
      */
     private void HandleUserFireInput() {
-        if (CrossPlatformInputManager.GetButtonDown("Fire1")) {
+        if (CrossPlatformInputManager.GetButtonDown("Fire1") && laserFiringCoroutine == null) {
             laserFiringCoroutine = StartCoroutine(ContinuousLaserFire());
         }
 
         if (CrossPlatformInputManager.GetButtonUp("Fire1")) {
-            StopCoroutine(laserFiringCoroutine);
+            // Since we have multiple ways to shoot, we need to have proper handling for the coroutine or
+            // else we will have a scenario where a player clicks the mouse and the fire button and messes
+            // everything up
+            if (laserFiringCoroutine != null) {
+                StopCoroutine(laserFiringCoroutine);
+            }
+            // Resets the coroutine so that we can actually trigger firing again
+            laserFiringCoroutine = null;
         }
     }
 
