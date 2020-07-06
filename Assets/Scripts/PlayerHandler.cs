@@ -8,14 +8,6 @@ using UnityStandardAssets.CrossPlatformInput;
  * Main class in charge of controlling the player object
  */
 public class PlayerHandler : MonoBehaviour, IEntity {
-    [Header("State Parameters")]
-
-    [Tooltip("Sets the player's maximum health")]
-    [SerializeField] int maxHealth = 2000;
-
-    [Tooltip("Serialized for debugging purposes only")]
-    [SerializeField] int currentHealth = 2000;
-
     [Header("Movement Parameters")]
 
     [Tooltip("Modifier to change normalized player speed independent of frame rate")]
@@ -73,11 +65,12 @@ public class PlayerHandler : MonoBehaviour, IEntity {
      */
     Coroutine laserFiringCoroutine;
 
+    bool isDying = false;
+
     void Start() {
         mainCamera = Camera.main;
         spriteRenderer = GetComponent<SpriteRenderer>();
         SetupBoundaries();
-        currentHealth = maxHealth;
 
         if (laserSFX == null) {
             Debug.LogError("laserSFX on object (" + gameObject.name + ") was not found");
@@ -89,8 +82,10 @@ public class PlayerHandler : MonoBehaviour, IEntity {
     }
 
     void Update() {
-        Move();
-        HandleUserFireInput();
+        if (!isDying) {
+            Move();
+            HandleUserFireInput();
+        }
     }
 
     /**
@@ -167,7 +162,44 @@ public class PlayerHandler : MonoBehaviour, IEntity {
     }
 
     public void OnStartDeathSequence() {
+        isDying = true;
+        StartCoroutine(PlayerDeathSequence());
+    }
+
+    /**
+     * Starts the death sequence. Since we want this to take place over a certain period of time AND
+     * be framerate independent, using a coroutine with fake "frame" units to animate this over a 
+     * certain period
+     */
+    private IEnumerator PlayerDeathSequence() {
+        float totalSequenceTime = 3;
+        int totalSequenceFrames = 100;
+        float currentFrame = 0;
+
+        if (laserFiringCoroutine != null) {
+            StopCoroutine(laserFiringCoroutine);
+        }
+
+        // Changes our character look to a more dying state
+        spriteRenderer.color = new Color(0.8f, 0.1f, 0.1f);
+
         AudioSource.PlayClipAtPoint(deathSFX, Camera.main.transform.position, deathSFXVolume);
+
+        while (currentFrame < 3) {
+            //Reduces the transparency of our avatar as they die per "frame"
+            var color = spriteRenderer.color;
+            color.a -= 0.01f;
+            spriteRenderer.color = color;
+
+            if (Mathf.Approximately(currentFrame, 1.2f) || Mathf.Approximately(currentFrame, 2.4f)) {
+                AudioSource.PlayClipAtPoint(deathSFX, Camera.main.transform.position, deathSFXVolume);
+            }
+
+            currentFrame += totalSequenceTime / totalSequenceFrames;
+
+            yield return new WaitForSeconds(totalSequenceTime / totalSequenceFrames);
+        }
+
         Destroy(gameObject);
     }
 }

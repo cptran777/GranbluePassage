@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPathing : MonoBehaviour {
+public class EnemyPathing : MonoBehaviour, IEntity {
     WaveConfig waveConfig;
 
     /**
@@ -16,13 +16,20 @@ public class EnemyPathing : MonoBehaviour {
      */
     int targetWaypointIndex = 0;
 
+    /**
+     * Prevents us from moving if we are currently in a dying sequence
+     */
+    bool isDying = false;
+
     void Start() {
         waypoints = waveConfig.GetWaypoints();
         transform.position = waypoints[targetWaypointIndex].transform.position;
     }
 
     void Update() {
-        Move();
+        if (!isDying) {
+            Move();
+        }
     }
 
     private void Move() {
@@ -41,5 +48,12 @@ public class EnemyPathing : MonoBehaviour {
 
     public void setWaveConfig(WaveConfig waveConfig) {
         this.waveConfig = waveConfig;
+    }
+
+    /**
+     * Triggers our dying sequence, i.e. stops moving in case the sequence is longer lasting
+     */
+    public void OnStartDeathSequence() {
+        isDying = true;
     }
 }

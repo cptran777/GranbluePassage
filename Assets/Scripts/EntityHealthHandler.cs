@@ -13,8 +13,15 @@ public class EntityHealthHandler : MonoBehaviour {
     [Tooltip("Serialized for debugging purposes only")]
     [SerializeField] int currentHealth = 2000;
 
+    /**
+     * We want to stop collision detections if we are in a dying state. Useful for entities that have
+     * a long death sequence and may still be getting hit
+     */
+    bool isDying = false;
+
     void Start() {
-        
+        // Normalization in case we accidentally changed max to be lower than current 
+        currentHealth = maxHealth;
     }
 
     void Update() {
@@ -28,8 +35,10 @@ public class EntityHealthHandler : MonoBehaviour {
             return;
         }
 
-        TakeDamage(damageDealer);
-        damageDealer.Hit();
+        if (!isDying) {
+            TakeDamage(damageDealer);
+            damageDealer.Hit();
+        }
     }
 
     /**
@@ -40,6 +49,7 @@ public class EntityHealthHandler : MonoBehaviour {
         int damage = damageDealer.GetDamage();
         currentHealth -= damage;
         if (currentHealth <= 0) {
+            isDying = true;
             SendMessage("OnStartDeathSequence");
         }
     }

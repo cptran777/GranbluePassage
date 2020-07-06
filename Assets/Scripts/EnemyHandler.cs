@@ -42,6 +42,13 @@ public class EnemyHandler : MonoBehaviour, IEntity {
     SpriteRenderer spriteRenderer;
 
     /**
+     * Useful flag to trigger when the enemy has a more complex dying sequence than simply 
+     * disappearing, and we want to flag this to prevent unnecessary behaviors during that
+     * sequence
+     */
+    bool isDying = false;
+
+    /**
      * Counts down until the enemy ship's next attack
      */
     float fireTimer = 1f;
@@ -52,8 +59,9 @@ public class EnemyHandler : MonoBehaviour, IEntity {
     }
 
     void Update() {
-        CountdownFireTimerAndShoot();
-        
+        if (!isDying) {
+            CountdownFireTimerAndShoot();
+        }
     }
 
     private void CountdownFireTimerAndShoot() {
@@ -83,8 +91,37 @@ public class EnemyHandler : MonoBehaviour, IEntity {
     }
 
     public void OnStartDeathSequence() {
+        isDying = true;
+        StartCoroutine(EnemyDeathSequence());
+    }
+
+    /**
+     * Starts the death sequence. Since we want this to take place over a certain period of time AND
+     * be framerate independent, using a coroutine with fake "frame" units to animate this over a 
+     * certain period
+     */
+    private IEnumerator EnemyDeathSequence() {
+        float totalSequenceTime = 1;
+        int totalSequenceFrames = 25;
+        float currentFrame = 0;
+
+        // Changes our character look to a more dying state
+        spriteRenderer.color = new Color(0.8f, 0.1f, 0.1f);
+
         Instantiate(deathVFX, transform.position, Quaternion.identity);
         AudioSource.PlayClipAtPoint(deathSFX, Camera.main.transform.position, deathSFXVolume);
+
+        while (currentFrame < 3) {
+            //Reduces the transparency of our avatar as they die per "frame"
+            var color = spriteRenderer.color;
+            color.a -= 0.04f;
+            spriteRenderer.color = color;
+
+            currentFrame += totalSequenceTime / totalSequenceFrames;
+
+            yield return new WaitForSeconds(totalSequenceTime / totalSequenceFrames);
+        }
+
         Destroy(gameObject);
     }
 }
