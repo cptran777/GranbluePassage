@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1600830146335722889}
   - component: {fileID: 3686562041980174175}
   - component: {fileID: -3016841782258023933}
+  - component: {fileID: -6668792772708366219}
   - component: {fileID: 7506828788829172287}
   m_Layer: 9
   m_Name: Enemy Slime
@@ -201,7 +202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d537cd2be444672af62aa897def748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 500
   fireRate: 2
   fireRateVariationFactor: 0.8
   projectileObject: {fileID: 8338108188942655388, guid: ccf2a7be002bb4a2c8367734f6e0c973,
@@ -210,6 +210,10 @@ MonoBehaviour:
   relativeProjectileXSpawnOffset: -3
   deathVFX: {fileID: 2362652678640572699, guid: 32dbb9b6b2c244859a4b796731fec523,
     type: 3}
+  projectileSFX: {fileID: 8300000, guid: 841369af1d3b046b4a63bf16a6b392c4, type: 3}
+  deathSFX: {fileID: 8300000, guid: 0984b6c7a73e04955a45f448d72ffe8d, type: 3}
+  projectileSFXVolume: 0.5
+  deathSFXVolume: 0.75
 --- !u!114 &-3016841782258023933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,6 +228,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 500
   shouldDestroySelfOnHit: 0
+--- !u!114 &-6668792772708366219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7808442410126261521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 398e16226f5d8473cbf8da3c8166899c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 500
+  currentHealth: 500
 --- !u!50 &7506828788829172287
 Rigidbody2D:
   serializedVersion: 4

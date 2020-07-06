@@ -7,7 +7,7 @@ using UnityStandardAssets.CrossPlatformInput;
 /**
  * Main class in charge of controlling the player object
  */
-public class PlayerHandler : MonoBehaviour {
+public class PlayerHandler : MonoBehaviour, IEntity {
     [Header("State Parameters")]
 
     [Tooltip("Sets the player's maximum health")]
@@ -43,6 +43,9 @@ public class PlayerHandler : MonoBehaviour {
 
     [Tooltip("The sound effect volume for the laser SFX")]
     [SerializeField] float laserSFXVolume = 0.5f;
+
+    [Tooltip("The sound effect volume for the death SFX")]
+    [SerializeField] float deathSFXVolume = 0.75f;
 
     /**
      * Reference to the main camera so that we can handle restrictions on player controls based on
@@ -163,27 +166,8 @@ public class PlayerHandler : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collidedEntity) {
-        print("Collision");
-        DamageDealer damageDealer = collidedEntity.GetComponent<DamageDealer>();
-        if (!damageDealer) {
-            Debug.LogError("Damage dealer not attached to object in collision: " + collidedEntity.name);
-            return;
-        }
-
-        TakeDamage(damageDealer);
-        damageDealer.Hit();
-    }
-
-    /**
-     * Given a damage dealer class handler, we will take the appropriate amount of damage
-     * from whatever has collided
-     */
-    private void TakeDamage(DamageDealer damageDealer) {
-        int damage = damageDealer.GetDamage();
-        currentHealth -= damage;
-        if (currentHealth <= 0) {
-            Destroy(gameObject);
-        }
+    public void OnStartDeathSequence() {
+        AudioSource.PlayClipAtPoint(deathSFX, Camera.main.transform.position, deathSFXVolume);
+        Destroy(gameObject);
     }
 }

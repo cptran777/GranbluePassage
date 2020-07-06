@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9037283893770007134}
   - component: {fileID: 3212764537652898925}
   - component: {fileID: 9037283893770007136}
+  - component: {fileID: -1667869266138687514}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -106,7 +107,7 @@ MonoBehaviour:
   relativeLaserXSpawnOffset: 3
   laserFireRate: 0.2
   laserSFX: {fileID: 8300000, guid: dfe846fe2f8a241c1af19f79efcffa31, type: 3}
-  deathSFX: {fileID: 0}
+  deathSFX: {fileID: 8300000, guid: 0984b6c7a73e04955a45f448d72ffe8d, type: 3}
   laserSFXVolume: 0.05
 --- !u!60 &9037283893770007134
 PolygonCollider2D:
@@ -556,3 +557,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-1667869266138687514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525592322733436300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 398e16226f5d8473cbf8da3c8166899c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 2000
+  currentHealth: 2000

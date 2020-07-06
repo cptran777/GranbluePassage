@@ -5,10 +5,7 @@ using UnityEngine;
 /**
  * Basic handler class for a typical enemy object
  */
-public class EnemyHandler : MonoBehaviour {
-    [Tooltip("Amount of health the enemy has before being destroyed")]
-    [SerializeField] int health = 100;
-
+public class EnemyHandler : MonoBehaviour, IEntity {
     [Tooltip("Rate, in seconds, that the enemy will shoot at the player as time between shots")]
     [SerializeField] float fireRate = 2f;
 
@@ -26,6 +23,18 @@ public class EnemyHandler : MonoBehaviour {
 
     [Tooltip("The visual effect game object that shows up upon this enemy's death")]
     [SerializeField] GameObject deathVFX;
+
+    [Tooltip("The sound effect that plays when the enemy shoots")]
+    [SerializeField] AudioClip projectileSFX;
+
+    [Tooltip("The sound effect that plays when the enemy is dead")]
+    [SerializeField] AudioClip deathSFX;
+
+    [Tooltip("The sound effect volume for the projectile SFX")]
+    [SerializeField] float projectileSFXVolume = 0.5f;
+
+    [Tooltip("The sound effect volume for the death SFX")]
+    [SerializeField] float deathSFXVolume = 0.75f;
 
     /**
      * Reference access to the sprite renderer of this enemy object
@@ -47,30 +56,6 @@ public class EnemyHandler : MonoBehaviour {
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collidedEntity) {
-        print("Collision on enemy");
-        DamageDealer damageDealer = collidedEntity.GetComponent<DamageDealer>();
-        if (!damageDealer) {
-            Debug.LogError("Damage dealer not attached to object in collision: " + collidedEntity.name);
-            return;
-        }
-
-        damageDealer.Hit();
-        TakeDamage(damageDealer);
-    }
-
-    /**
-     * Given a damage dealer class handler, we will take the appropriate amount of damage
-     * from whatever has collided
-     */
-    private void TakeDamage(DamageDealer damageDealer) {
-        int damage = damageDealer.GetDamage();
-        health -= damage;
-        if (health <= 0) {
-            StartDeathSequence();
-        }
-    }
-
     private void CountdownFireTimerAndShoot() {
         fireTimer -= Time.deltaTime;
         if (fireTimer <= 0) {
@@ -88,6 +73,7 @@ public class EnemyHandler : MonoBehaviour {
             transform.position.z
         );
 
+        AudioSource.PlayClipAtPoint(projectileSFX, Camera.main.transform.position, projectileSFXVolume);
         // Quaternion.identity => keep the default rotation
         GameObject projectile = Instantiate(projectileObject, position, Quaternion.identity);
     }
@@ -96,8 +82,9 @@ public class EnemyHandler : MonoBehaviour {
         fireTimer = Random.Range(fireRate - fireRateVariationFactor, fireRate + fireRateVariationFactor);
     }
 
-    private void StartDeathSequence() {
+    public void OnStartDeathSequence() {
         Instantiate(deathVFX, transform.position, Quaternion.identity);
+        AudioSource.PlayClipAtPoint(deathSFX, Camera.main.transform.position, deathSFXVolume);
         Destroy(gameObject);
     }
 }

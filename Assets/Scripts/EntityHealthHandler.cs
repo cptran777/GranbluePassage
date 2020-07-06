@@ -1,0 +1,46 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/**
+ * This class is meant to be attached to objects representing entities that have
+ * some health and are able to take damage
+ */
+public class EntityHealthHandler : MonoBehaviour {
+    [Tooltip("Sets the player's maximum health")]
+    [SerializeField] int maxHealth = 2000;
+
+    [Tooltip("Serialized for debugging purposes only")]
+    [SerializeField] int currentHealth = 2000;
+
+    void Start() {
+        
+    }
+
+    void Update() {
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collidedEntity) {
+        DamageDealer damageDealer = collidedEntity.GetComponent<DamageDealer>();
+        if (!damageDealer) {
+            Debug.LogError("Damage dealer not attached to object in collision: " + collidedEntity.name);
+            return;
+        }
+
+        TakeDamage(damageDealer);
+        damageDealer.Hit();
+    }
+
+    /**
+     * Given a damage dealer class handler, we will take the appropriate amount of damage
+     * from whatever has collided
+     */
+    private void TakeDamage(DamageDealer damageDealer) {
+        int damage = damageDealer.GetDamage();
+        currentHealth -= damage;
+        if (currentHealth <= 0) {
+            SendMessage("OnStartDeathSequence");
+        }
+    }
+}
