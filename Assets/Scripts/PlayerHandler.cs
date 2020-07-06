@@ -8,8 +8,20 @@ using UnityStandardAssets.CrossPlatformInput;
  * Main class in charge of controlling the player object
  */
 public class PlayerHandler : MonoBehaviour {
+    [Header("State Parameters")]
+
+    [Tooltip("Sets the player's maximum health")]
+    [SerializeField] int maxHealth = 2000;
+
+    [Tooltip("Serialized for debugging purposes only")]
+    [SerializeField] int currentHealth = 2000;
+
+    [Header("Movement Parameters")]
+
     [Tooltip("Modifier to change normalized player speed independent of frame rate")]
     [SerializeField] float playerSpeedModifier = 5f;
+
+    [Header("Shooting Parameters")]
 
     [Tooltip("Reference to the game object used as the laser for the player")]
     [SerializeField] GameObject laserObject;
@@ -22,6 +34,15 @@ public class PlayerHandler : MonoBehaviour {
 
     [Tooltip("Rate at which the laser fires when the player holds down the fire button, defined as time between shots in seconds")]
     [SerializeField] float laserFireRate = 0.5f;
+
+    [Tooltip("The sound effect that plays when the player shoots")]
+    [SerializeField] AudioClip laserSFX;
+
+    [Tooltip("The sound effect that plays when the player is dead")]
+    [SerializeField] AudioClip deathSFX;
+
+    [Tooltip("The sound effect volume for the laser SFX")]
+    [SerializeField] float laserSFXVolume = 0.5f;
 
     /**
      * Reference to the main camera so that we can handle restrictions on player controls based on
@@ -53,6 +74,15 @@ public class PlayerHandler : MonoBehaviour {
         mainCamera = Camera.main;
         spriteRenderer = GetComponent<SpriteRenderer>();
         SetupBoundaries();
+        currentHealth = maxHealth;
+
+        if (laserSFX == null) {
+            Debug.LogError("laserSFX on object (" + gameObject.name + ") was not found");
+        }
+
+        if (deathSFX == null) {
+            Debug.LogError("deathSFX on object (" + gameObject.name + ") was not found");
+        }
     }
 
     void Update() {
@@ -128,7 +158,32 @@ public class PlayerHandler : MonoBehaviour {
             );
             // Quaternion.identity => keep the default rotation
             GameObject laser = Instantiate(laserObject, position, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(laserSFX, Camera.main.transform.position, laserSFXVolume);
             yield return new WaitForSeconds(laserFireRate);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collidedEntity) {
+        print("Collision");
+        DamageDealer damageDealer = collidedEntity.GetComponent<DamageDealer>();
+        if (!damageDealer) {
+            Debug.LogError("Damage dealer not attached to object in collision: " + collidedEntity.name);
+            return;
+        }
+
+        TakeDamage(damageDealer);
+        damageDealer.Hit();
+    }
+
+    /**
+     * Given a damage dealer class handler, we will take the appropriate amount of damage
+     * from whatever has collided
+     */
+    private void TakeDamage(DamageDealer damageDealer) {
+        int damage = damageDealer.GetDamage();
+        currentHealth -= damage;
+        if (currentHealth <= 0) {
+            Destroy(gameObject);
         }
     }
 }
