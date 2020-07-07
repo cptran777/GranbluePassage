@@ -200,6 +200,7 @@ public class PlayerHandler : MonoBehaviour, IEntity {
             yield return new WaitForSeconds(totalSequenceTime / totalSequenceFrames);
         }
 
+        FindObjectOfType<LevelHandler>().LoadGameOver(2.5f);
         Destroy(gameObject);
     }
 }

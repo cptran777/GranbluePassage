@@ -4977,6 +4977,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 0.02
+--- !u!1 &722757306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 722757308}
+  - component: {fileID: 722757307}
+  m_Layer: 0
+  m_Name: Enemy Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &722757307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722757306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4862a2543f04192bfe6d494ac6dc1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  secondaryEnemySpawner: {fileID: 225031931022673651, guid: b47158297245349fca9ca53f6ff834bb,
+    type: 3}
+  bossSpawners:
+  - {fileID: 8681290446618633589, guid: bf3dbba95d52f4f0396fb81cbbe7752e, type: 3}
+  timeToSpawnSecondaryEnemies: 10
+  timeBetweenBossSpawns: 15
+  timeBetweenBossSpawnsRandomFactor: 5
+--- !u!4 &722757308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722757306}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1278649985
 GameObject:
   m_ObjectHideFlags: 0
@@ -9867,36 +9917,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!1 &2088693940
-GameObject:
+--- !u!1001 &710410507386396848
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2088693941}
-  m_Layer: 0
-  m_Name: Level Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2088693941
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088693940}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 710410507848667140, guid: 03c89aa50c3974dd1b718459d70fed81,
+        type: 3}
+      propertyPath: m_Name
+      value: Level Controller
+      objectReference: {fileID: 0}
+    - target: {fileID: 710410507848667141, guid: 03c89aa50c3974dd1b718459d70fed81,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710410507848667141, guid: 03c89aa50c3974dd1b718459d70fed81,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710410507848667141, guid: 03c89aa50c3974dd1b718459d70fed81,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710410507848667141, guid: 03c89aa50c3974dd1b718459d70fed81,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710410507848667141, guid: 03c89aa50c3974dd1b718459d70fed81,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710410507848667141, guid: 03c89aa50c3974dd1b718459d70fed81,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710410507848667141, guid: 03c89aa50c3974dd1b718459d70fed81,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 710410507848667141, guid: 03c89aa50c3974dd1b718459d70fed81,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 710410507848667141, guid: 03c89aa50c3974dd1b718459d70fed81,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710410507848667141, guid: 03c89aa50c3974dd1b718459d70fed81,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710410507848667141, guid: 03c89aa50c3974dd1b718459d70fed81,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 03c89aa50c3974dd1b718459d70fed81, type: 3}
 --- !u!1001 &2481900324359915116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9912,12 +10001,12 @@ PrefabInstance:
     - target: {fileID: 2481900326205924733, guid: 1979dc30c8fc34215807023d6bebfcdc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.36
+      value: 16.19
       objectReference: {fileID: 0}
     - target: {fileID: 2481900326205924733, guid: 1979dc30c8fc34215807023d6bebfcdc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2481900326205924733, guid: 1979dc30c8fc34215807023d6bebfcdc,
         type: 3}
@@ -10230,6 +10319,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187611863194844553, guid: 6cdd4ab53916d4c768e5bde7b5b687e4,
+        type: 3}
+      propertyPath: isLooping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7187611863194844554, guid: 6cdd4ab53916d4c768e5bde7b5b687e4,
         type: 3}

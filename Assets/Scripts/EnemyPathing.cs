@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyPathing : MonoBehaviour, IEntity {
+    // Note: If an enemy does not loop then they destroy themselves at the end of the path.
+    // Note2: Looping is more useful for boss type monsters
+    [Tooltip("Whether or not an enemy should continue looping through the path")]
+    [SerializeField] bool shouldLoop = false;
+
     WaveConfig waveConfig;
 
     /**
@@ -42,7 +47,13 @@ public class EnemyPathing : MonoBehaviour, IEntity {
                 targetWaypointIndex += 1;
             }
         } else {
-            Destroy(gameObject);
+            if (shouldLoop) {
+                // Note: If we are looping, the first path waypoint is presumed to be the entryway
+                // and should therefore be ignored after the first time
+                targetWaypointIndex = 1;
+            } else {
+                Destroy(gameObject);
+            }
         }
     }
 

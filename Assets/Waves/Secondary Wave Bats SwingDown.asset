@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e0174d4f5a9486ca4d50669c91afaf, type: 3}
+  m_Name: Secondary Wave Bats SwingDown
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 6526613790803968849, guid: 659f3c408ccca482eb3bcccf41b2e08f,
+    type: 3}
+  pathPrefab: {fileID: 8192334029728085042, guid: b97d269d1417b4725a7d6542a37c9aea,
+    type: 3}
+  timeBetweenSpawns: 0.5
+  timeBetweenSpawnsRandomFactor: 0.3
+  numberOfEnemies: 4
+  moveSpeed: 3.5
