@@ -101,6 +101,9 @@ public class EnemyHandler : MonoBehaviour, IEntity {
 
     public void OnStartDeathSequence() {
         isDying = true;
+        if (gameSession == null) {
+            Debug.LogError("game session is null for: " + gameObject.name);
+        }
         gameSession.AddToScore(killScoreValue);
         StartCoroutine(EnemyDeathSequence());
     }

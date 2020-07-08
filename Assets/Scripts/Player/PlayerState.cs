@@ -49,4 +49,8 @@ public class PlayerState : MonoBehaviour {
     public void AddToChargeBar(float amount) {
         chargeBar = Mathf.Min(chargeBarMax, chargeBar + amount);
     }
+
+    public void ChargeAttackUsed() {
+        chargeBar = 0;
+    }
 }
