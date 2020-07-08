@@ -13,9 +13,6 @@ public class EntityHealthHandler : MonoBehaviour {
     [Tooltip("Serialized for debugging purposes only")]
     [SerializeField] int currentHealth = 2000;
 
-    [Tooltip("SFX to play upon being hit, optional")]
-    [SerializeField] AudioClip hitSFX;
-
     /**
      * We want to stop collision detections if we are in a dying state. Useful for entities that have
      * a long death sequence and may still be getting hit
@@ -54,7 +51,7 @@ public class EntityHealthHandler : MonoBehaviour {
         if (currentHealth <= 0) {
             isDying = true;
             SendMessage("OnStartDeathSequence");
-        } else if (hitSFX != null) {
+        } else {
             SendMessage("OnStartHitSequence");
         }
     }
