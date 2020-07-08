@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
+/**
+ * Handler attached to the player object to create a module that interacts between user input and activating
+ * the player's skills
+ */
 public class PlayerSkills : MonoBehaviour {
     [Tooltip("References the game object that contains the player's charge attack skill")]
     [SerializeField] GameObject chargeAttack;
