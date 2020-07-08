@@ -166,6 +166,10 @@ public class PlayerHandler : MonoBehaviour, IEntity {
         StartCoroutine(PlayerDeathSequence());
     }
 
+    public void OnStartHitSequence() {
+        // Do nothing
+    }
+
     /**
      * Starts the death sequence. Since we want this to take place over a certain period of time AND
      * be framerate independent, using a coroutine with fake "frame" units to animate this over a 

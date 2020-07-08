@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2500
   currentHealth: 2500
+  hitSFX: {fileID: 0}
 --- !u!60 &8589737178714634433
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -451,6 +452,7 @@ MonoBehaviour:
   deathSFX: {fileID: 8300000, guid: 0984b6c7a73e04955a45f448d72ffe8d, type: 3}
   projectileSFXVolume: 0.5
   deathSFXVolume: 0.75
+  killScoreValue: 1875
 --- !u!114 &-7265686236365532081
 MonoBehaviour:
   m_ObjectHideFlags: 0

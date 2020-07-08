@@ -36,10 +36,18 @@ public class EnemyHandler : MonoBehaviour, IEntity {
     [Tooltip("The sound effect volume for the death SFX")]
     [SerializeField] float deathSFXVolume = 0.75f;
 
+    [Tooltip("The amount of points the enemy is worth upon being killed")]
+    [SerializeField] int killScoreValue = 100;
+
     /**
      * Reference access to the sprite renderer of this enemy object
      */
     SpriteRenderer spriteRenderer;
+
+    /**
+     * Reference access to the game session object that holds the score
+     */
+    GameSession gameSession;
 
     /**
      * Useful flag to trigger when the enemy has a more complex dying sequence than simply 
@@ -56,6 +64,7 @@ public class EnemyHandler : MonoBehaviour, IEntity {
     void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
         SetFireTimer();
+        gameSession = FindObjectOfType<GameSession>();
     }
 
     void Update() {
@@ -92,7 +101,12 @@ public class EnemyHandler : MonoBehaviour, IEntity {
 
     public void OnStartDeathSequence() {
         isDying = true;
+        gameSession.AddToScore(killScoreValue);
         StartCoroutine(EnemyDeathSequence());
+    }
+
+    public void OnStartHitSequence() {
+        // Do nothing
     }
 
     /**

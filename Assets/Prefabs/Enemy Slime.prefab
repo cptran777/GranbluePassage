@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8bad1cd43564f7180af00bb223aea2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shouldLoop: 0
 --- !u!212 &482152176708649585
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -215,6 +216,7 @@ MonoBehaviour:
   deathSFX: {fileID: 8300000, guid: 0984b6c7a73e04955a45f448d72ffe8d, type: 3}
   projectileSFXVolume: 0.5
   deathSFXVolume: 0.75
+  killScoreValue: 254
 --- !u!114 &-3016841782258023933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 500
   currentHealth: 500
+  hitSFX: {fileID: 0}
 --- !u!50 &7506828788829172287
 Rigidbody2D:
   serializedVersion: 4

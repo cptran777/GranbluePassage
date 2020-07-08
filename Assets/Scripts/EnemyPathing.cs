@@ -67,4 +67,8 @@ public class EnemyPathing : MonoBehaviour, IEntity {
     public void OnStartDeathSequence() {
         isDying = true;
     }
+
+    public void OnStartHitSequence() {
+        // Do nothing
+    }
 }
