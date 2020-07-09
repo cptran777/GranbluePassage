@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 3212764537652898925}
   - component: {fileID: 9037283893770007136}
   - component: {fileID: -1667869266138687514}
+  - component: {fileID: 1271506741}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,8 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3163a5c6407cb46309e715bdc00b6de5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2000
-  currentHealth: 2000
   playerSpeedModifier: 5
   laserObject: {fileID: 3116984640777630822, guid: 5555b9c80721b421aaf4cb37a01a2067,
     type: 3}
@@ -109,6 +108,7 @@ MonoBehaviour:
   laserSFX: {fileID: 8300000, guid: dfe846fe2f8a241c1af19f79efcffa31, type: 3}
   deathSFX: {fileID: 8300000, guid: 0984b6c7a73e04955a45f448d72ffe8d, type: 3}
   laserSFXVolume: 0.05
+  deathSFXVolume: 0.75
 --- !u!60 &9037283893770007134
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -571,3 +571,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2000
   currentHealth: 2000
+--- !u!114 &1271506741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525592322733436300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a56f7b5c98f46c7b623bff850af242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeAttack: {fileID: 8442775437837670965, guid: 5d65eddc62c20408eb1f230f96e8d9dc,
+    type: 3}

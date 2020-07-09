@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7506828788829172287}
   - component: {fileID: 9089121709032000418}
   - component: {fileID: 3603462188098464622}
+  - component: {fileID: 2558428495513396683}
   m_Layer: 9
   m_Name: Enemy Slime
   m_TagString: Enemy
@@ -246,7 +247,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 500
   currentHealth: 500
-  hitSFX: {fileID: 0}
 --- !u!50 &7506828788829172287
 Rigidbody2D:
   serializedVersion: 4
@@ -299,4 +299,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69cc4c42ad2a142b69cabf78ed645e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargeBarKillValue: 10
+  chargeBarKillValue: 5
+--- !u!114 &2558428495513396683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7808442410126261521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6ce164adb6c2453f8a7bcefa73bbd51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUps:
+  - {fileID: 8861357290116429181, guid: a6db892d06baa43f491fefb17311c3ae, type: 3}
+  dropChance: 0.1

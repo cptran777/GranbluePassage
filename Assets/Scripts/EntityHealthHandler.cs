@@ -31,7 +31,6 @@ public class EntityHealthHandler : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collidedEntity) {
         DamageDealer damageDealer = collidedEntity.GetComponent<DamageDealer>();
         if (!damageDealer) {
-            Debug.LogError("Damage dealer not attached to object in collision: " + collidedEntity.name);
             return;
         }
 
@@ -57,6 +56,10 @@ public class EntityHealthHandler : MonoBehaviour {
     }
 
     public int GetCurrentHealth() { return currentHealth; }
+
+    public void RestoreCurrentHealth(int amount) {
+        currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+    }
 
     public int GetMaxHealth() { return maxHealth; }
 }

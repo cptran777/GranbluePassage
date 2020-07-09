@@ -6135,26 +6135,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4388264390287632323}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1271506733 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5525592322733436300, guid: 5fb1d96cbad114e5985d47b1b561ec42,
-    type: 3}
-  m_PrefabInstance: {fileID: 9037283893770007129}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1271506741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1271506733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6a56f7b5c98f46c7b623bff850af242, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chargeAttack: {fileID: 8442775437837670965, guid: 5d65eddc62c20408eb1f230f96e8d9dc,
-    type: 3}
 --- !u!1 &1278649985
 GameObject:
   m_ObjectHideFlags: 0
@@ -11822,31 +11802,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -1667869266138687514, guid: 5fb1d96cbad114e5985d47b1b561ec42,
-        type: 3}
-      propertyPath: maxHealth
-      value: 2000
-      objectReference: {fileID: 0}
-    - target: {fileID: 227568735446612971, guid: 5fb1d96cbad114e5985d47b1b561ec42,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 227568735446612971, guid: 5fb1d96cbad114e5985d47b1b561ec42,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 227568735446612971, guid: 5fb1d96cbad114e5985d47b1b561ec42,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 227568735446612971, guid: 5fb1d96cbad114e5985d47b1b561ec42,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 436071737084035585, guid: 5fb1d96cbad114e5985d47b1b561ec42,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11906,11 +11861,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 9037283893770007131, guid: 5fb1d96cbad114e5985d47b1b561ec42,
-        type: 3}
-      propertyPath: maxHealth
-      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fb1d96cbad114e5985d47b1b561ec42, type: 3}
