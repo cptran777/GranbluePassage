@@ -85,7 +85,6 @@ public class ArrowRainSkill : MonoBehaviour {
             // move sprite towards the target location
             arrow.transform.position = Vector2.MoveTowards(arrow.transform.position, transform.position, step);
             if (arrow.transform.position == transform.position || Mathf.Approximately(step, 0)) {
-                print("Arrow should be destroyed");
                 Destroy(arrow);
             }
         }

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: -7265686236365532081}
   - component: {fileID: 3821011257220256191}
   - component: {fileID: 6098030696311926893}
+  - component: {fileID: 3475112964571352025}
   m_Layer: 9
   m_Name: Wind Summon
   m_TagString: Enemy
@@ -535,3 +536,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3475112964571352025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6526613790803968849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee0690ebc9474391abcd9e05200043b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

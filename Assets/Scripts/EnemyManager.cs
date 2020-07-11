@@ -36,9 +36,11 @@ public class EnemyManager : MonoBehaviour {
             Random.Range(timeBetweenBossSpawns - timeBetweenBossSpawnsRandomFactor, timeBetweenBossSpawns + timeBetweenBossSpawnsRandomFactor)
         );
 
-        if (currentBossSpawnerIndex < bossSpawners.Count) {
-            Instantiate(bossSpawners[currentBossSpawnerIndex]);
-            currentBossSpawnerIndex += 1;
+        if (currentBossSpawnerIndex >= bossSpawners.Count) {
+            currentBossSpawnerIndex = 0;
         }
+
+        Instantiate(bossSpawners[currentBossSpawnerIndex]);
+        currentBossSpawnerIndex += 1;
     }
 }
